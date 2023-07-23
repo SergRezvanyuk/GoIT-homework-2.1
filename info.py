@@ -2,6 +2,57 @@ from datetime import datetime as dt
 import re
 from abc import ABC, abstractmethod
 
+class Help(ABC):
+
+    @abstractmethod
+    def print_help(self):
+        pass
+
+
+class ConsoleHelp(Help):
+    def print_help(self):
+        print('   Add - add a new record')
+        print('   Search - search by name')
+        print('   Edit - search by name and edit')
+        print('   Load - read from file')
+        print('   Remove - delete the file')
+        print('   Save - write to a file')
+        print('   Congratulate - welcome to the week')
+        print('   View - review all records')
+        print('   Exit - exit the program')
+
+
+class Person(ABC):
+    def __init__(self, card):
+        self.card = card
+
+    @abstractmethod
+    def print_card(self):
+        pass
+
+
+class ConsolePerson(Person):
+    def print_card(self):
+        result = []
+        for account in self.card:
+            if account['birthday']:
+                birth = account['birthday'].strftime("%d/%m/%Y")
+            else:
+                birth = ''
+            if account['phones']:
+                new_value = []
+                for phone in account['phones']:
+                    # print(phone)
+                    if phone:
+                        new_value.append(phone)
+                phone = ', '.join(new_value)
+            else:
+                phone = ''
+            result.append(
+                "_" * 50 + "\n\n" + f"Name: {account['name']} \nPhones: {phone} \nBirthday: {birth} \nEmail: {account['email']} \nStatus: {account['status']} \nNote: {account['note']}")
+        print( '\n'.join(result)+'\n')
+
+
 
 class Record:
 
@@ -51,7 +102,7 @@ class Phone(Field):
                 self.values = input("Phones(+48......... or +38..........) (multiple phones can be added with space between them. +48 pattern has 9 symbols after code): ")
             try:
                 for number in self.values.split(' '):
-                    if re.match('^\+48\d{9}$', number) or re.match('^\\+38\d{10}$', number) or number == '':
+                    if re.match('^\+48\d{9}$', number) or re.match('^\\+38\d{10}$',number) or re.match('^0\d{9}$', number) or number == '':
                         self.value.append(number)
                     else:
                         raise ValueError

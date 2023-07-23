@@ -5,30 +5,31 @@ from info import *
 import os
 
 
+
 class AddressBook(UserList):
     def __init__(self):
         self.data = []
         self.counter = -1
 
-    def __str__(self):
-        result = []
-        for account in self.data:
-            if account['birthday']:
-                birth = account['birthday'].strftime("%d/%m/%Y")
-            else:
-                birth = ''
-            if account['phones']:
-                new_value = []
-                for phone in account['phones']:
-                    print(phone)
-                    if phone:
-                        new_value.append(phone)
-                phone = ', '.join(new_value)
-            else:
-                phone = ''
-            result.append(
-                "_" * 50 + "\n" + f"Name: {account['name']} \nPhones: {phone} \nBirthday: {birth} \nEmail: {account['email']} \nStatus: {account['status']} \nNote: {account['note']}\n" + "_" * 50 + '\n')
-        return '\n'.join(result)
+    # def __str__(self):
+    #     result = []
+    #     for account in self.data:
+    #         if account['birthday']:
+    #             birth = account['birthday'].strftime("%d/%m/%Y")
+    #         else:
+    #             birth = ''
+    #         if account['phones']:
+    #             new_value = []
+    #             for phone in account['phones']:
+    #                 print(phone)
+    #                 if phone:
+    #                     new_value.append(phone)
+    #             phone = ', '.join(new_value)
+    #         else:
+    #             phone = ''
+    #         result.append(
+    #             "_" * 50 + "\n" + f"Name: {account['name']} \nPhones: {phone} \nBirthday: {birth} \nEmail: {account['email']} \nStatus: {account['status']} \nNote: {account['note']}\n" + "_" * 50 + '\n')
+    #     return '\n'.join(result)
 
     def __next__(self):
         phones = []

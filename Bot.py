@@ -42,7 +42,11 @@ class Bot:
         elif action == 'congratulate':
             print(self.book.congratulate())
         elif action == 'view':
-            print(self.book)
+            bd = AddressBook()
+            bd.load("auto_save")
+            print(bd.data)
+            cp = ConsolePerson(bd.data)
+            cp.print_card()
         elif action == 'exit':
             pass
         else:
