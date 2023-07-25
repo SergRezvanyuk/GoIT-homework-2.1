@@ -2,6 +2,7 @@ from Bot import Bot
 from info import *
 
 
+
 if __name__ == "__main__":
     print('Hello. I am your contact-assistant. What should I do with your contacts?')
     bot = Bot()
